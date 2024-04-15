@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.marianevieira.firstapp.R
-import com.marianevieira.firstapp.databinding.FragmentCalculoBinding
+import com.marianevieira.firstapp.databinding.FragmentPessoaBinding
 import com.marianevieira.firstapp.databinding.FragmentVerificaBinding
 
 class VerificaFragment : Fragment() {

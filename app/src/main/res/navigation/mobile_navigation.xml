@@ -7,10 +7,10 @@
 
 
     <fragment
-        android:id="@+id/calculoFragment"
+        android:id="@+id/pessoaFragment"
         android:name="com.marianevieira.firstapp.view.PessoaFragment"
-        android:label="fragment_calculo"
-        tools:layout="@layout/fragment_calculo" />
+        android:label="Pessoa"
+        tools:layout="@layout/fragment_pessoa" />
     <fragment
         android:id="@+id/verificaFragment"
         android:name="com.marianevieira.firstapp.view.VerificaFragment"
@@ -19,6 +19,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.marianevieira.firstapp.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="First App"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/allPessoasFragment"
+        android:name="com.marianevieira.firstapp.view.AllPessoasFragment"
+        android:label="Pessoa"
+        tools:layout="@layout/fragment_all_pessoas" />
 </navigation>
