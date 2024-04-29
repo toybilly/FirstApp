@@ -9,64 +9,65 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="4dp">
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/lblNome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="Nome:" />
+            <ImageView
+                android:id="@+id/imgMasculino"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_boy"
+                app:tint="#3063E4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/imgFeminino"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_girl"
+                app:tint="#EA2ECA"
+                app:layout_constraintStart_toEndOf="@+id/imgMasculino"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <TextView
                 android:id="@+id/tvNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mari"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toEndOf="@+id/imgFeminino"
+                app:layout_constraintTop_toTopOf="parent"
                 />
-
-            <TextView
-                android:id="@+id/lblIdade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="Idade:"/>
-
 
             <TextView
                 android:id="@+id/tvIdade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="17"/>
-
-            <ImageView
-                android:id="@+id/imgFeminino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_girl"
-                />
-
-            <ImageView
-                android:id="@+id/imgMasculino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_boy"
+                android:text="17"
+                app:layout_constraintStart_toEndOf="@+id/imgFeminino"
+                app:layout_constraintTop_toBottomOf="@+id/tvNome"
                 />
 
             <TextView
                 android:id="@+id/tvFaixa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="infantil"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

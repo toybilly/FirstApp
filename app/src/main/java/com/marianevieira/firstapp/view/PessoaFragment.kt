@@ -1,5 +1,6 @@
 package com.marianevieira.firstapp.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,25 +32,36 @@ class PessoaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Carregar a pessoa caso tenha selecionado
+        arguments?.let {
+            viewModel.getPessoa(it.getInt("pessoaId"))
+        }
+
         binding.btnEnviar.setOnClickListener {
             val nome = binding.edtNome.editableText.toString()
             val anoNascimento = binding.edtAnoNascimento.editableText.toString()
-            val sexo = binding.edtSexo.editableText.toString()
+            var sexo = ""
             var faixa = ""
 
-            if (nome != "" && anoNascimento != "") {
+            if (nome != "" && anoNascimento != "" && binding.rbMasculino.isChecked || binding.rbFeminino.isChecked) {
+
+                if (binding.rbMasculino.isChecked){
+                    sexo = "Masculino"
+                } else {
+                    sexo = "Feminino"
+                }
 
                 val anoAtual = LocalDateTime.now().year
                 val idade = anoAtual - anoNascimento.toInt()
 
 
-                if  (idade <12){
+                if  (idade <= 12){
                     faixa = "infantil"
-                } else if( idade <18) {
+                } else if( idade <= 17) {
                     faixa = "adolescente"
-                } else if(idade <64){
+                } else if(idade <=64){
                     faixa = "adulto"
-                } else if(idade >65){
+                } else {
                     faixa = "idoso"
                 }
 
@@ -60,15 +72,48 @@ class PessoaFragment : Fragment() {
                     faixa = faixa
                 )
 
-                viewModel.insert(pessoa)
+                viewModel.pessoa.value?.let {
+                    pessoa.id = it.id
+                    viewModel.update(pessoa)
+                }?: run {
+                    viewModel.insert(pessoa)
+                }
+
+
 
                 binding.edtNome.editableText.clear()
                 binding.edtAnoNascimento.editableText.clear()
-                binding.edtSexo.editableText.clear()
                 findNavController().navigateUp()
             } else {
                 Toast.makeText(requireContext(), "Digite seus dados", Toast.LENGTH_LONG).show()
             }
+        }
+
+        binding.btnDeletar.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Exclusao de pessoa")
+                .setMessage("Você realmente deseja excluir")
+                .setPositiveButton("Sim") { _,_ ->
+                    viewModel.delete(viewModel.pessoa.value?.id ?: 0)
+                    findNavController().navigateUp()
+                }
+
+                .setNegativeButton("Não"){ _,_ ->}
+                .show()
+        }
+
+
+        viewModel.pessoa.observe(viewLifecycleOwner){pessoa ->
+            binding.edtNome.setText(pessoa.nome)
+            binding.edtAnoNascimento.setText((LocalDateTime.now().year - pessoa.idade).toString())
+
+            if (pessoa.sexo == "Masculino"){
+                binding.rbMasculino.isChecked = true
+            } else {
+                binding.rbFeminino.isChecked = true
+            }
+
+            binding.btnDeletar.visibility = View.VISIBLE
         }
     }
 }
